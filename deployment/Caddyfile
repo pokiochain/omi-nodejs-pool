@@ -1,0 +1,13 @@
+POOL_URL {
+	route /api/* {
+		uri strip_prefix /api
+		reverse_proxy 127.0.0.1:8117
+	}
+	route {
+		root * /home/gntlpool/pool/website
+		file_server
+	}
+	log {
+		output file /var/log/caddy/caddy.log
+	}
+}

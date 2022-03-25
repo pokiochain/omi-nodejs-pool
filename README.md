@@ -585,7 +585,8 @@ Explanation for each field:
 }
 ```
 
-This software contains four distinct modules:
+This software contains several distinct modules:
+* `daemon` - Which opens communications to the coin daemon
 * `pool` - Which opens ports for miners to connect and processes shares
 * `api` - Used by the website to display network, pool and miners' data
 * `unlocker` - Processes block candidates and increases miners' balances when blocks are unlocked
@@ -594,7 +595,7 @@ This software contains four distinct modules:
 * `telegramBot`	- Processes telegram bot commands
 
 
-By default, running the `init.js` script will start up all four modules. You can optionally have the script start
+By default, running the `init.js` script will start up all modules. You can optionally have the script start
 only start a specific module by using the `-module=name` command argument, for example:
 
 ```bash

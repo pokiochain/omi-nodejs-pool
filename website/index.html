@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1">
 
-    <title>Mining Pool</title>
+    <title>GNTL Mining Pool</title>
+    <meta name="description" content="Welcome to the GNTL Mining Pool. Come and mine with a pool that's not just miners... but friends! (we have worker stats, custom payout thresholds, and great support)">
+    <meta name="keywords" content="BKdilse, Cryptonight, GNTL, hash, hashrate, invest, Mining, money, nicehash, payment, payout, Pool, RandomARQ, reward, support, XMR-STAK, XMRig">
 
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery-timeago/1.6.3/jquery.timeago.min.js"></script>
@@ -18,6 +20,8 @@
 
     <link href="themes/default.css?" rel="stylesheet">
     <link href="themes/custom.css" rel="stylesheet">
+
+    <link href="images/gntl32x32.png" type="image/png" rel="icon">
 </head>
 <body>
 
@@ -25,7 +29,7 @@
 
     <!-- Navigation -->
     <div class="nav-side-menu">
-    <div class="brand"><a href="/"><span id="coinSymbol"></span> <span data-tkey="miningPool">Mining Pool</span></a></div>
+    <div class="brand"><a href="/"><img src="images/gntl32x32.png">   <span id="coinSymbol"></span> <span data-tkey="miningPool">Mining Pool</span></a></div>
         <i class="fa fa-bars fa-2x toggle-btn" data-toggle="collapse" data-target="#menu-content"></i>
         <div class="menu-list">
             <ul id="menu-content" class="menu-content collapsed out">
@@ -64,6 +68,10 @@
                 <li><a class="hot_link" data-page="faq.html" href="#faq">
                     <i class="fa fa-comments"></i> <span data-tkey="faq">FAQ</span>
                 </a></li>
+                <li><a class="hot_link" target="_new" href="https://github.com/The-GNTL-Project/Documentation/wiki/FAQ">
+                    <i class="fa fa-info"></i> <span data-tkey="FAQ">FAQ Wiki</span>
+                </a></li>
+
             </ul>
         </div>
 
@@ -72,9 +80,9 @@
     <!-- Top Bar -->
     <div id="top-bar">
         <div><span data-tkey="network">Network</span>: <strong><span id="g_networkHashrate"><span data-tkey="na">N/A</span></span></strong></div>
-        <div><span data-tkey="poolProp">Prop Pool</span>: <strong><span id="g_poolHashrate"><span data-tkey="na">N/A</span></span></strong></div>
-        <div><span data-tkey="poolSolo">Solo Pool</span>: <strong><span id="g_poolHashrateSolo"><span data-tkey="na">N/A</span></span></strong></div>
-        <div><span data-tkey="you">You</span>: <strong><span id="g_userHashrate"><span tkey="na">N/A</span></span></strong></div>
+        <div><span data-tkey="poolProp">Prop Pool</span>: <strong><span id="g_poolHashrate"><span data-tkey="na">N/A</span></span><span id="g_poolPercentage"></span></strong></div>
+        <div><span data-tkey="poolSolo">Solo Pool</span>: <strong><span id="g_poolHashrateSolo"><span data-tkey="na">N/A</span></span><span id="g_poolPercentageSolo"></span></strong></div>
+        <div><span data-tkey="you">You</span>: <strong><span id="g_userHashrate"><span tkey="na">N/A</span></span><span id="g_userPercentage"></span></strong></div>
         <div><span id="statsUpdated"><span data-tkey="statsUpdated">Stats Updated</span> &nbsp;</span></div>
         <div id="langSelector"></div>
     </div>
@@ -90,7 +98,7 @@
 <!-- Footer -->
 <footer>
     <div class="text-muted">
-        <span data-tkey="poweredBy">Powered by</span> <a target="_blank" href="https://github.com/dvandal/cryptonote-nodejs-pool"><i class="fa fa-github"></i> cryptonote-nodejs-pool</a>
+        <span data-tkey="poweredBy">Powered by</span> <a target="_blank" href="https://github.com/The-GNTL-Project/cryptonote-nodejs-pool"><i class="fa fa-github"></i> The GNTL Project - cryptonote-nodejs-pool</a>
         <span id="poolVersion"></span>
         <span class="hidden-xs"><span data-tkey="openSource">open sourced under the</span> <a href="http://www.gnu.org/licenses/gpl-2.0.html">GPL</a></span>
     </div>
@@ -165,11 +173,12 @@ function updateLiveStats(data, key) {
 // Update global informations
 function updateIndex(){
     updateText('coinSymbol', lastStats.config.symbol);
-    updateText('g_networkHashrate', getReadableHashRateString(lastStats.network.difficulty / lastStats.config.coinDifficultyTarget) + '/sec');
-    updateText('g_poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/sec');
-    updateText('g_poolHashrateSolo', getReadableHashRateString(lastStats.pool.hashrateSolo) + '/sec');
+    updateText('g_networkHashrate', getReadableHashRateString(lastStats.network.difficulty / lastStats.config.coinDifficultyTarget) + '/s');
+    updateText('g_poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/s');
+    updateText('g_poolPercentage', ' (' + ((lastStats.pool.hashrate/(lastStats.network.difficulty / lastStats.config.coinDifficultyTarget))*100).toFixed(2) + '%)');
     if (lastStats.miner && lastStats.miner.hashrate){
-         updateText('g_userHashrate', getReadableHashRateString(lastStats.miner.hashrate) + '/sec');
+         updateText('g_userHashrate', getReadableHashRateString(lastStats.miner.hashrate) + '/s');
+         updateText('g_userPercentage', ' (' + ((lastStats.miner.hashrate/lastStats.pool.hashrate)*100).toFixed(2) + '%)');
     }
     else{
         updateText('g_userHashrate', 'N/A');

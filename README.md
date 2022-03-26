@@ -5,6 +5,7 @@ This is a customized version of the original pool, for GNTL Coin.
 ## Table of Contents
   - [Requirements](#requirements)
     - [Server Specification](#server-specification)
+    - [Connectivity](#connectivity)
   - [Installation](#installation)
     - [Create Pool User](#create-pool-user)
     - [Install GNTL Node](#install-gntl-node)
@@ -39,9 +40,21 @@ This is a customized version of the original pool, for GNTL Coin.
 * Ubuntu Server 18.04 LTS (This is what we've tested on, but may work on other versions)
 * SSH access
 
+### Connectivity
+* Domain Name (sub-domain is reccomended, e.g. gntl.domain.com)
+* Public Static IP Address
+* Firewall configured to allow inbound TCP ports for Pool:
+```
+80
+443
+10007
+20007
+30007
+```
+
 ## Installation
 ### Create Pool User:
-We'll create a pool user, run the following, and follow the additional steps:
+We'll create a pool user (the username is referenced in parts of the install, so ensure you mach it exactly), run the following, and follow the additional steps:
 ```
 sudo adduser gntlpool
 ```
@@ -63,7 +76,7 @@ Follow the [GNTL Node](https://github.com/The-GNTL-Project/Documentation/wiki/GN
 ### Install GNTL Pool
 Run the following to install via the bash script:
 ```
-curl -o- https://raw.githubusercontent.com/The-GNTL-Project/cryptonote-nodejs-pool/gntl-dev/deployment/deploy.bash | bash
+curl -o- https://raw.githubusercontent.com/The-GNTL-Project/cryptonote-nodejs-pool/master/deployment/deploy.bash | bash
 ```
 
 ## Configuration
@@ -174,7 +187,7 @@ cd ~
 pm2 save
 pm2 startup
 ```
-**NOTE: Run the output command provided by the `pm2 startup` command.**
+**NOTE: Run the output command provided by the `pm2 startup` command.  If the pm2 command is not found, run `source ~/.bashrc` then try again.**
 
 ## Additional Information
 ### Back End Parameters

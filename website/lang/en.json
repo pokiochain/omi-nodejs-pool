@@ -1,5 +1,5 @@
 {
-    "miningPool": "Mining Pool",
+    "miningPool": "Pool",
     "dashboard": "Dashboard",
     "gettingStarted": "Getting Started",
     "yourStats": "Worker Statistics",
@@ -73,7 +73,7 @@
     "paymentSummaryMulti": "On %DATE% you have received %AMOUNT% in %COUNT% payments",
 
     "connectionDetails": "Connection Details",
-    "miningPoolHost": "Mining Pool Address",
+    "miningPoolHost": "Pool Address",
     "cnAlgorithm": "Algorithm",
     "username": "Username",
     "usernameDesc": "This is your wallet address",

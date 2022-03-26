@@ -41,7 +41,7 @@ This is a customized version of the original pool, for GNTL Coin.
 
 ## Installation
 ### Create Pool User:
-We'll create a pool user, run the following, and follow the additional steps:
+We'll create a pool user (the username is referenced in parts of the install, so ensure you mach it exactly), run the following, and follow the additional steps:
 ```
 sudo adduser gntlpool
 ```
@@ -63,7 +63,7 @@ Follow the [GNTL Node](https://github.com/The-GNTL-Project/Documentation/wiki/GN
 ### Install GNTL Pool
 Run the following to install via the bash script:
 ```
-curl -o- https://raw.githubusercontent.com/The-GNTL-Project/cryptonote-nodejs-pool/gntl-dev/deployment/deploy.bash | bash
+curl -o- https://raw.githubusercontent.com/The-GNTL-Project/cryptonote-nodejs-pool/master/deployment/deploy.bash | bash
 ```
 
 ## Configuration

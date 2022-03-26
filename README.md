@@ -5,6 +5,7 @@ This is a customized version of the original pool, for GNTL Coin.
 ## Table of Contents
   - [Requirements](#requirements)
     - [Server Specification](#server-specification)
+    - [Connectivity](#connectivity)
   - [Installation](#installation)
     - [Create Pool User](#create-pool-user)
     - [Install GNTL Node](#install-gntl-node)
@@ -38,6 +39,18 @@ This is a customized version of the original pool, for GNTL Coin.
 * 25GB SSD Storage
 * Ubuntu Server 18.04 LTS (This is what we've tested on, but may work on other versions)
 * SSH access
+
+### Connectivity
+* Domain Name (sub-domain is reccomended, e.g. gntl.domain.com)
+* Public Static IP Address
+* Firewall configured to allow inbound TCP ports for Pool:
+```
+80
+443
+10007
+20007
+30007
+```
 
 ## Installation
 ### Create Pool User:
@@ -174,7 +187,7 @@ cd ~
 pm2 save
 pm2 startup
 ```
-**NOTE: Run the output command provided by the `pm2 startup` command.**
+**NOTE: Run the output command provided by the `pm2 startup` command.  If the pm2 command is not found, run `source ~/.bashrc` then try again.**
 
 ## Additional Information
 ### Back End Parameters

@@ -1,9 +1,62 @@
 <!-- Statistics -->
 <div id="poolStats" class="row">
-    <div id="mainPoolStats"></div>
     <div id="networkStats"></div>
+    <div id="mainPoolStats"></div>
     <div id="poolDetails"></div>
 </div>
+
+<script id="siblingTemplate" type="text/x-handlebars-template">
+    <div id="networkStats{{coin}}">
+        <div class="col-lg-3 col-sm-4">
+            <div class="infoBox hoverExpandEffect mergedBg">
+                <div class="icon">
+                    <span class="fa fa-dashboard"></span>
+                </div>
+                <div class="content">
+                    <div class="text"><span data-tkey="networkHashrate">Network Hash Rate</span></div>
+                    <div class="value"><span id="networkHashrate{{coin}}">N/A</span></div>
+                </div>
+            </div>
+        </div>
+        <div class="col-lg-3 col-sm-4">
+            <div class="infoBox hoverExpandEffect mergedBg">
+                <div class="icon">
+                    <span class="fa fa-unlock-alt"></span>
+                </div>
+                <div class="content">
+                    <div class="text"><span data-tkey="networkDifficulty">Difficulty</span></div>
+                    <div class="value"><span id="networkDifficulty{{coin}}">N/A</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Blockchain Height -->
+        <div class="col-lg-3 col-sm-4">
+            <div class="infoBox hoverExpandEffect mergedBg">
+                <div class="icon">
+                    <span class="fa fa-bars"></span>
+                </div>
+                <div class="content">
+                    <div class="text"><span data-tkey="blockchainHeight">Blockchain Height</span></div>
+                    <div class="value"><span id="blockchainHeight{{coin}}">N/A</span></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Last Reward -->
+        <div class="col-lg-3 col-sm-4">
+            <div class="infoBox hoverExpandEffect mergedBg">
+                <div class="icon">
+                    <span class="fa fa-dollar"></span>
+                </div>
+                <div class="content">
+                    <div class="text"><span data-tkey="networkLastReward">Last Reward</span></div>
+                    <div class="value"><span id="networkLastReward{{coin}}">N/A</span></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</script>
 
 <script id="mainPoolTemplate" type="text/x-handlebars-template">
 <!-- Pool Hash Rate -->
@@ -13,9 +66,8 @@
                 <span class="fa fa-dashboard"></span>
             </div>
             <div class="content">
-                <div class="text"><span data-tkey="poolHashrate">PROP/SOLO Pool Hash Rate</span></div>
-                <div class="value"><span id="poolHashrate" class="smallText">N/A</span> <span class="smallText">(<span id="hashPower">0%</span>)</span></div>
-                <div class="value"><span id="poolHashrateSolo" class="smallText">N/A</span> <span class="smallText">(<span id="hashPowerSolo">0%</span>)</span></div>
+                <div class="text"><span data-tkey="poolHashrate">Pool Hash Rate</span> (PROP | SOLO)</div>
+                <div class="value"><span id="poolHashrate">N/A</span> | <span id="poolHashrateSolo">N/A</span></div>
             </div>
         </div>
     </div>
@@ -27,10 +79,10 @@
                 <span class="fa fa-cubes"></span>
             </div>
             <div class="content">
-                <div class="text"><span data-tkey="blocksTotal">Blocks Found</span> (PROP/SOLO)</div>
+                <div class="text"><span data-tkey="blocksTotal">Blocks Found</span> (PROP | SOLO)</div>
                 <div class="value">
                     {{#blocks}}
-                    <span class="smallText" id="blocksTotal{{coin}}">{{blocks}}/{{blocksSolo}}</span><sup>{{symbol}}</sup>&nbsp;
+                    <span id="blocksTotal{{coin}}">{{blocks}} | {{blocksSolo}}</span>
                     {{/blocks}}
                 </div>
             </div>
@@ -46,7 +98,7 @@
             <div class="content">
                 <div class="text"><span data-tkey="blockSolvedTime">Blocks Found Every</span></div>
                 <div class="value">
-                    <span class="smallText" id="blockSolvedTime">N/A</span> <span class="smallText">(<span class="smallText">estimated</span>)</span>
+                    <span id="blockSolvedTime">N/A</span> <span class="smallText">(<span class="smallText">estimated</span>)</span>
                 </div>
                 <div class="value">
                     <span class="smallText">LAST BLOCK: <span id="poolLastBlockFound">Never</span>
@@ -55,75 +107,75 @@
         </div>
     </div>
 
-    <!-- Current Effort -->
+    <!-- Blocks Found per Day -->
+    <div class="col-lg-3 col-sm-4">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-history"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span data-tkey="blockPerDay">Blocks per Day</span></div>
+                <div class="value"><span id="blockPerDay{{coin}}">N/A</span> <span class="smallText">(<span data-tkey="estimated">estimated</span>)</span></div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Round Hashes -->
     <div class="col-lg-3 col-sm-4">
         <div class="infoBox hoverExpandEffect">
             <div class="icon">
                 <span class="fa fa-line-chart"></span>
             </div>
             <div class="content">
+                <div class="text"><span data-tkey="roundHashes">Round Hashes</span></div>
+                <div class="value"><span id="roundHashes{{coin}}">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Current Effort -->
+    <div class="col-lg-3 col-sm-4">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-percent"></span>
+            </div>
+            <div class="content">
                 <div class="text"><span data-tkey="currentEffort">Current Effort</span></div>
                 <div class="value">
                     {{#efforts}}
-                    <span class="smallText" id="currentEffort{{coin}}">{{effort}}</span><sup>{{symbol}}</sup>&nbsp;
+                    <span id="currentEffort{{coin}}">{{effort}}</span>
                     {{/efforts}}
                 </div>
             </div>
         </div>
     </div>
-</script>
 
-<script id="siblingTemplate" type="text/x-handlebars-template">
-    <div id="networkStats{{coin}}">
-        <div class="col-lg-3 col-sm-4">
-            <div class="infoBox hoverExpandEffect mergedBg">
-                <div class="icon">
-                    <span class="fa fa-dashboard"></span>
-                </div>
-                <div class="content">
-                    <div class="text"><span data-tkey="networkHashrate">Network Hash Rate</span> ({{symbol}})</div>
-                    <div class="value"><span id="networkHashrate{{coin}}">N/A</span></div>
-                </div>
+    <!-- Percentage of Network -->
+    <div class="col-lg-3 col-sm-4">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-percent"></span>
             </div>
-        </div>
-        <div class="col-lg-3 col-sm-4">
-            <div class="infoBox hoverExpandEffect mergedBg">
-                <div class="icon">
-                    <span class="fa fa-unlock-alt"></span>
-                </div>
-                <div class="content">
-                    <div class="text"><span data-tkey="networkDifficulty">Difficulty</span> ({{symbol}})</div>
-                    <div class="value"><span id="networkDifficulty{{coin}}">N/A</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Blockchain Height -->
-        <div class="col-lg-3 col-sm-4">
-            <div class="infoBox hoverExpandEffect mergedBg">
-                <div class="icon">
-                    <span class="fa fa-bars"></span>
-                </div>
-                <div class="content">
-                    <div class="text"><span data-tkey="blockchainHeight">Blockchain Height</span> ({{symbol}})</div>
-                    <div class="value"><span id="blockchainHeight{{coin}}">N/A</span></div>
-                </div>
-            </div>
-        </div>
-
-        <!-- Last Reward -->
-        <div class="col-lg-3 col-sm-4">
-            <div class="infoBox hoverExpandEffect mergedBg">
-                <div class="icon">
-                    <span class="fa fa-dollar"></span>
-                </div>
-                <div class="content">
-                    <div class="text"><span data-tkey="networkLastReward">Last Reward</span> ({{symbol}})</div>
-                    <div class="value"><span id="networkLastReward{{coin}}">N/A</span></div>
-                </div>
+            <div class="content">
+                <div class="text"><span data-tkey="percentageOfNetwork">Percentage of Network</span></div>
+                <div class="value"><span id="percentageOfNetwork{{coin}}">N/A</span></div>
             </div>
         </div>
     </div>
+    
+    <!-- Average Luck -->
+    <div class="col-lg-3 col-sm-4">
+        <div class="infoBox hoverExpandEffect">
+            <div class="icon">
+                <span class="fa fa-percent"></span>
+            </div>
+            <div class="content">
+                <div class="text"><span data-tkey="averageLuck">Average Luck</span></div>
+                <div class="value"><span id="averageLuck">N/A</span></div>
+            </div>
+        </div>
+    </div>
+
 </script>
 
 <script id="poolDetailTemplate" type="text/x-handlebars-template">
@@ -134,10 +186,10 @@
                 <span class="fa fa-group"></span>
             </div>
             <div class="content">
-                <div class="text"><span data-tkey="propSoloConnectedMiners">Connected Miners</span> (PROP/SOLO)</div>
+                <div class="text"><span data-tkey="propSoloConnectedMiners">Connected Miners</span> (PROP | SOLO)</div>
                 <div class="value">
                     {{#blocks}}
-                      <span class="smallText" id="poolMiners{{coin}}">{{miners}}/{{minersSolo}}</span><sup>{{symbol}}</sup>&nbsp;
+                      <span id="poolMiners{{coin}}">{{miners}} | {{minersSolo}}</span>
                     {{/blocks}}
                 </div>
             </div>
@@ -151,8 +203,8 @@
                 <span class="fa fa-percent"></span>
             </div>
             <div class="content">
-                <div class="text"><span data-tkey="poolFee">Pool Fee</span> (PROP/SOLO)</div>
-                <div class="value"><span id="poolFee" class="smallText">N/A</span><sup>{{symbol}}</sup></div>
+                <div class="text"><span data-tkey="poolFee">Pool Fee</span> (PROP | SOLO)</div>
+                <div class="value"><span id="poolFee">N/A</span></div>
             </div>
         </div>
     </div>
@@ -165,7 +217,7 @@
             </div>
             <div class="content">
                 <div class="text"><span data-tkey="finderReward">Finder Reward</span></div>
-                <div class="value"><span id="finderReward">N/A</span><sup>{{symbol}}</sup></div>
+                <div class="value"><span id="finderReward">N/A</span></div>
             </div>
         </div>
     </div>
@@ -236,6 +288,34 @@
     </div>
 </div>
 
+<h3><span data-tkey="welcome">Welcome to the GNTL Pool</span></h3>
+
+<h4>Latest News:</h4>
+<h5><li>04/03/2022 : GNTL have been up and running for 1 year today.</li></h5>
+    
+<h4>GNTL Information:</h4>
+<h5><li>GNTL is a decentralized public blockchain project and is fully open source. The development team consists of enthusiasts who have been dealing with cryptography and computer science for a long time, and have now decided to give this coin a go.</li></h5>
+<h5><li>User friendly and community driven.</li></h5>
+<h5><li>Anonymous and untraceable.</li></h5>
+<h5><li>Open source and open minded.</li></h5>
+<h5><li>Fast and secure.</li></h5>
+<h5><li>GNTL is based on the ArQmA codebase, which is based on the Monero codebase and is constantly enhanced with new features, developed by the team itself or the ArQmA team.</li></h5>
+<h5><li>The GNTL Network uses the RandomARQ PoW Hashing Algorithm, and is ASIC and Nicehash resistant to give everyone a chance to mine. The blockchain is fast to synchronize. Transfers are anonymous and untraceable using Bulletproof RingCT.</li></h5>
+<h5><li>Open source and open minded.</li></h5>
+
+<h4>Exchanges:</h4>
+<h5><li><a href="https://www.exbitron.com/trading/gntlbtc" target="_blank">Exbitron (BTC)</a></li></h5>
+<h5><li><a href="https://www.exbitron.com/trading/gntlusdt" target="_blank">Exbitron (USDT)</a></li></h5>
+<h5><li><a href="https://www.exbitron.com/trading/gntlxmr" target="_blank">Exbitron (XMR)</a></li></h5>
+
+<h4>Mining Details:</h4>
+<h5><li>XMRig Algo: <b>RandomARQ (RandomX variant for ArQmA)</b></li></h5>
+<h5><li>Block Target Time: <b>2 Minutes</b></li></h5>
+<h5><li>Blocks Per Day: <b>720 Blocks</b> (on average)</li></h5>
+<h5><li>Mineable with: <b>CPU</b> (favourable), <b>GPU</b></li></h5>
+<h5><li>Scratchpad Size: <b>256KB L3 Cache per CPU Thread</b></li></h5>
+<h5><li>Other Requirements: <b>2.5GB RAM per NUMA Node</b></li></h5>
+
 <!-- Javascript -->
 <script>
 // Update current page
@@ -265,26 +345,29 @@ currentPage = {
                 }
             }
 
-            updateText(`networkHashrate${updateKey}`, getReadableHashRateString(stats.network.difficulty / stats.config.coinDifficultyTarget) + '/sec');
+            updateText(`networkHashrate${updateKey}`, getReadableHashRateString(stats.network.difficulty / stats.config.coinDifficultyTarget) + '/s');
             updateText(`networkDifficulty${updateKey}`, formatNumber(stats.network.difficulty.toString(), ' '));
             updateText(`blockchainHeight${updateKey}`, formatNumber(stats.network.height.toString(), ' '));
             updateText(`networkLastReward${updateKey}`, getReadableCoin(stats, stats.lastblock.reward));
 
-            updateText(`poolMiners${updateKey}`, `${stats.pool.miners}/${stats.pool.minersSolo}`);
-            updateText(`blocksTotal${updateKey}`, `${stats.pool.totalBlocks}/${stats.pool.totalBlocksSolo}`);
+            updateText(`poolMiners${updateKey}`, `${stats.pool.miners} | ${stats.pool.minersSolo}`);
+            updateText(`blocksTotal${updateKey}`, `${stats.pool.totalBlocks} | ${stats.pool.totalBlocksSolo}`);
             updateText(`currentEffort${updateKey}`, (stats.pool.roundHashes / stats.network.difficulty * 100).toFixed(1) + '%');
 
+            updateText(`roundHashes${updateKey}`, formatNumber(lastStats.pool.roundHashes.toString(), ' '));
+            updateText(`blockPerDay${updateKey}`, (1/((lastStats.network.difficulty/stats.config.coinDifficultyTarget) / ((24*60*60/stats.config.coinDifficultyTarget)*lastStats.pool.hashrate))).toFixed(2));
+            updateText(`percentageOfNetwork${updateKey}`, (lastStats.pool.hashrate / (lastStats.network.difficulty/stats.config.coinDifficultyTarget) * 100).toFixed(2) + '%');
+            $('#averageLuck').html(formatLuck(lastStats.pool.totalDiff, lastStats.pool.totalShares));
 
             let el = updateText('lastHash', lastStats.lastblock.hash)
             if (el)
                 el.setAttribute('href', getBlockchainUrl(lastStats.lastblock.hash, lastStats));
-            updateText('poolHashrate', 'PROP: ' + getReadableHashRateString(lastStats.pool.hashrate) + '/sec');
-            updateText('poolHashrateSolo', 'SOLO: ' + getReadableHashRateString(lastStats.pool.hashrateSolo) + '/sec');
+            updateText('poolHashrate', getReadableHashRateString(lastStats.pool.hashrate) + '/s');
+            updateText('poolHashrateSolo', getReadableHashRateString(lastStats.pool.hashrateSolo) + '/s');
             var hashPowerSolo = lastStats.pool.hashrateSolo / (lastStats.network.difficulty / lastStats.config.coinDifficultyTarget) * 100;
             updateText ('hashPowerSolo', hashPowerSolo.toFixed(2) + '%');
             var hashPower = lastStats.pool.hashrate / (lastStats.network.difficulty / lastStats.config.coinDifficultyTarget) * 100;
             updateText('hashPower', hashPower.toFixed(2) + '%');
-
 
             updateText('blockSolvedTime', getReadableTime(lastStats.network.difficulty / lastStats.pool.hashrate));
         }

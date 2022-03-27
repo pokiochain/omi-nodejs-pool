@@ -11,7 +11,6 @@ This is a customized version of the original pool, for GNTL Coin.
     - [Install GNTL Node](#install-gntl-node)
     - [Install GNTL Pool](#install-gntl-pool)
   - [Configuration](#configuration)
-    - [Configure Redis Server Service](#configure-redis-server-service)
     - [Create Pool Wallet](#create-pool-wallet)
       - [Create Wallet Password File](#create-wallet-password-file)
       - [Restore Pool Wallet](#restore-pool-wallet)
@@ -80,31 +79,11 @@ curl -o- https://raw.githubusercontent.com/The-GNTL-Project/cryptonote-nodejs-po
 ```
 
 ## Configuration
-### Configure Redis Server Service
-Open up redis.conf for editing:
-```
-sudo nano /etc/redis/redis.conf
-```
-Search using the F6 key, for:
-```
-supervised no
-```
-
-Change it to the following, then save and exit nano:
-```
-supervised systemd
-```
-
-Enable the service:
-```
-sudo systemctl enable redis-server
-```
-
 ### Create Pool Wallet:
-Run the following to create a Pool Wallet name **Pool**, ensure you save the Wallet Address and Seed Phrase, then exit the Wallet CLI:
+Run the following to create a Pool Wallet named **Pool**, ensure you save the Wallet Address and Seed Phrase, then exit the Wallet CLI:
 ```
 cd ~/pool
-~/gntl/gntl-wallet-cli
+~/gntl/gntl-wallet-cli --generate-new-wallet=Pool
 ```
 
 #### Create Wallet Password File:
@@ -117,7 +96,7 @@ Type in the password, then save and exit nano.
 #### Restore Pool Wallet
 It's good practice to restore the wallet to **test**, using your seed, to ensure that you've captured the seed phrase correctly, run the following to restore the wallet, and then exit the CLI:
 ```
-~/gntl/gntl-wallet-cli --restore-deterministic-wallet
+~/gntl/gntl-wallet-cli --generate-new-wallet=test --restore-deterministic-wallet
 ```
 
 Once you've confirmed the Wallet Address matches the once you captured earlier, you can delete the wallet by running:

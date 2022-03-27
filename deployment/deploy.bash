@@ -26,7 +26,7 @@ cd ~
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Dependancies..."
 echo "----------------------------------------------------------------------------------------------------"
-sudo apt install libssl-dev libboost-all-dev libsodium-dev -y
+sudo apt install build-essential make libssl-dev libboost-all-dev libsodium-dev -y
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing NodeJS..."
 echo "----------------------------------------------------------------------------------------------------"
@@ -48,6 +48,8 @@ sudo apt update
 sudo apt install redis-server -y
 sudo cp pool/deployment/rc.local /etc/
 sudo chmod +x /etc/rc.local
+sudo sed -i 's/^supervised no/supervised systemd/' /etc/redis/redis.conf
+sudo systemctl enable redis-server
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Caddy..."
 echo "----------------------------------------------------------------------------------------------------"

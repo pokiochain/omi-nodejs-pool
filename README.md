@@ -734,7 +734,7 @@ curl 127.0.0.1:18081/json_rpc -d '{"method":"getblockheaderbyheight","params":{"
 
 
 ### Pools Using This Software
-* https://gntldev.pool.gntl.co.uk/
+* https://dev.gntl.uk/
 
 ### Donations
 If you want to make a donation to [Dvandal](https://github.com/dvandal/), the developper of the original project, you can send any amount of your choice to one of theses addresses:

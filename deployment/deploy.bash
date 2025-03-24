@@ -26,13 +26,13 @@ cd ~
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Dependancies..."
 echo "----------------------------------------------------------------------------------------------------"
-sudo apt install build-essential make libssl-dev libboost-all-dev libsodium-dev -y
+sudo apt install build-essential git make libssl-dev libboost-all-dev libsodium-dev -y
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing NodeJS..."
 echo "----------------------------------------------------------------------------------------------------"
-curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.1/install.sh | bash
+curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.40.2/install.sh | bash
 source ~/.nvm/nvm.sh
-nvm install v14.17.3
+nvm install v20.14.0
 echo "----------------------------------------------------------------------------------------------------"
 echo "Cloning Pool..."
 echo "----------------------------------------------------------------------------------------------------"
@@ -43,10 +43,8 @@ cd ~
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Redis Server..."
 echo "----------------------------------------------------------------------------------------------------"
-sudo add-apt-repository ppa:chris-lea/redis-server -y
-sudo apt update
 sudo apt install redis-server -y
-sudo cp pool/deployment/rc.local /etc/
+sudo cp deployment/rc.local /etc/
 sudo chmod +x /etc/rc.local
 sudo sed -i 's/^supervised no/supervised systemd/' /etc/redis/redis.conf
 sudo systemctl enable redis-server
@@ -54,15 +52,15 @@ echo "--------------------------------------------------------------------------
 echo "Installing Caddy..."
 echo "----------------------------------------------------------------------------------------------------"
 sudo apt install -y debian-keyring debian-archive-keyring apt-transport-https
-curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo tee /etc/apt/trusted.gpg.d/caddy-stable.asc
+curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --dearmor -o /usr/share/keyrings/caddy-stable-archive-keyring.gpg
 curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
 sudo apt update
 sudo apt install caddy
-sudo cp pool/deployment/Caddyfile /etc/caddy/Caddyfile
+sudo cp deployment/Caddyfile /etc/caddy/Caddyfile
 echo "----------------------------------------------------------------------------------------------------"
 echo "Configuring Logrotate..."
 echo "----------------------------------------------------------------------------------------------------"
-sudo cp pool/deployment/gntl-logs /etc/logrotate.d/gntl-logs
+sudo cp deployment/gntl-logs /etc/logrotate.d/gntl-logs
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Node Process Manager..."
 echo "----------------------------------------------------------------------------------------------------"

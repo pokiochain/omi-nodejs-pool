@@ -26,7 +26,7 @@ cd ~
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Dependancies..."
 echo "----------------------------------------------------------------------------------------------------"
-sudo apt install build-essential git make libssl-dev libboost-all-dev libsodium-dev -y
+sudo apt install build-essential git make nano libssl-dev libboost-all-dev libsodium-dev -y
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing NodeJS..."
 echo "----------------------------------------------------------------------------------------------------"
@@ -37,6 +37,9 @@ echo "--------------------------------------------------------------------------
 echo "Cloning Pool..."
 echo "----------------------------------------------------------------------------------------------------"
 git clone https://github.com/The-GNTL-Project/cryptonote-nodejs-pool pool
+echo "----------------------------------------------------------------------------------------------------"
+echo "Installing Pool..."
+echo "----------------------------------------------------------------------------------------------------"
 cd pool
 npm update
 cd ~
@@ -44,7 +47,7 @@ echo "--------------------------------------------------------------------------
 echo "Installing Redis Server..."
 echo "----------------------------------------------------------------------------------------------------"
 sudo apt install redis-server -y
-sudo cp deployment/rc.local /etc/
+sudo cp ~/pool/deployment/rc.local /etc/
 sudo chmod +x /etc/rc.local
 sudo sed -i 's/^supervised no/supervised systemd/' /etc/redis/redis.conf
 sudo systemctl enable redis-server
@@ -56,11 +59,12 @@ curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/gpg.key' | sudo gpg --d
 curl -1sLf 'https://dl.cloudsmith.io/public/caddy/stable/debian.deb.txt' | sudo tee /etc/apt/sources.list.d/caddy-stable.list
 sudo apt update
 sudo apt install caddy
-sudo cp deployment/Caddyfile /etc/caddy/Caddyfile
+sudo chown -R gntlpool:www-data /home/gntlpool/
+sudo cp ~/pool/deployment/Caddyfile /etc/caddy/Caddyfile
 echo "----------------------------------------------------------------------------------------------------"
 echo "Configuring Logrotate..."
 echo "----------------------------------------------------------------------------------------------------"
-sudo cp deployment/gntl-logs /etc/logrotate.d/gntl-logs
+sudo cp ~/pool/deployment/gntl-logs /etc/logrotate.d/gntl-logs
 echo "----------------------------------------------------------------------------------------------------"
 echo "Installing Node Process Manager..."
 echo "----------------------------------------------------------------------------------------------------"

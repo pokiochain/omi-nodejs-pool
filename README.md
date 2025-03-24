@@ -73,6 +73,10 @@ sudo su - gntlpool
 Follow the [GNTL Node](https://github.com/The-GNTL-Project/Documentation/wiki/GNTL-Node) setup steps to get the GNTL Node setup and the chain synched.
 
 ### Install GNTL Pool
+If you rebooted during the Node install, switch to the created user for the rest of the install, run the following:
+```
+sudo su - gntlpool
+```
 Run the following to install via the bash script:
 ```
 curl -o- https://raw.githubusercontent.com/The-GNTL-Project/cryptonote-nodejs-pool/master/deployment/deploy.bash | bash
@@ -160,13 +164,16 @@ var discord = "https://discordapp.com/invite/YourPool";
 ### Create Processes
 We'll now create our Wallet and Pool processes in Node Process Manager, and save the processes, and finally set them to auto-start on boot, by running:
 ```
+exit
+sudo su - gntlpool
+cd ~/pool
 pm2 start /home/gntlpool/gntl/gntl-wallet-rpc -- --rpc-bind-port 16669 --password-file wallet_pass --wallet-file Pool --disable-rpc-login --trusted-daemon
 pm2 start init.js --name=Pool --log-date-format="YYYY-MM-DD HH:mm Z"
 cd ~
 pm2 save
 pm2 startup
 ```
-**NOTE: Run the output command provided by the `pm2 startup` command.  If the pm2 command is not found, run `source ~/.bashrc` then try again.**
+**NOTE: Run the output from pm2 startup, to allow processes to autostart on reboot.**
 
 ## Additional Information
 ### Back End Parameters

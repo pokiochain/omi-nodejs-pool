@@ -36,7 +36,7 @@ This is a customized version of the original pool, for GNTL Coin.
 * 2 CPU Cores (with AES_NI)
 * 4GB Ram
 * 25GB SSD Storage
-* Ubuntu Server 18.04 LTS (This is what we've tested on, but may work on other versions)
+* Ubuntu Server 24.04 LTS (This is what we've tested on, but may work on other versions)
 * SSH access
 
 ### Connectivity

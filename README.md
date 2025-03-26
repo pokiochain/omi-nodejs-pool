@@ -162,10 +162,14 @@ var discord = "https://discordapp.com/invite/YourPool";
 ```
 
 ### Create Processes
-We'll now create our Wallet and Pool processes in Node Process Manager, and save the processes, and finally set them to auto-start on boot, by running:
+Reload Environment Changes:
 ```
 exit
 sudo su - gntlpool
+```
+
+We'll now create our Wallet and Pool processes in Node Process Manager, and save the processes, and finally set them to auto-start on boot, by running:
+```
 cd ~/pool
 pm2 start /home/gntlpool/gntl/gntl-wallet-rpc -- --rpc-bind-port 16669 --password-file wallet_pass --wallet-file Pool --disable-rpc-login --trusted-daemon
 pm2 start init.js --name=Pool --log-date-format="YYYY-MM-DD HH:mm Z"

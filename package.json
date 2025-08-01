@@ -1,31 +1,31 @@
 {
-	"name": "cryptonote-nodejs-pool",
-	"version": "1.4.0",
+	"name": "omi-nodejs-pool",
+	"version": "1.0.0",
 	"license": "GPL-2.0",
-	"Original author": "Daniel Vandal",
-	"Maintained by": "The-GNTL-Project",
+	"author": "Daniel Vandal",
 	"repository": {
 		"type": "git",
-		"url": "https://github.com/The-GNTL-Project/cryptonote-nodejs-pool.git"
+		"url": "https://github.com/Ominirex/omi-nodejs-pool.git"
 	},
 	"dependencies": {
-		"async": "1.5.2",
+		"async": "^1.5.2",
+		"axios": "^1.6.7",
 		"base58-native": "*",
 		"bignum": "*",
-		"bufferutil": "^4.0.8",
-		"cli-color": "^2.0.4",
+		"bufferutil": "*",
+		"cli-color": "*",
 		"cryptoforknote-util": "git+https://github.com/MoneroOcean/node-cryptoforknote-util.git#v15.6.2",
 		"cryptonight-hashing": "git+https://github.com/MoneroOcean/node-cryptonight-hashing.git#v29.0.6",
-		"dateformat": "4.5.1",
+		"dateformat": "^4.5.1",
 		"domexception": "*",
-		"mailgun.js": "^8.2.2",
-		"node-telegram-bot-api": "^0.61.0",
-		"nodemailer": "^6.9.13",
+		"mailgun.js": "*",
+		"node-telegram-bot-api": "*",
+		"nodemailer": "^6.4.18",
 		"nodemailer-sendmail-transport": "*",
 		"redis": "3.1.2",
 		"socket.io": "^3.1.1",
 		"time-ago": "*",
-		"utf-8-validate": "^6.0.4"
+		"utf-8-validate": "*"
 	},
 	"engines": {
 		"node": ">=8.11.3"

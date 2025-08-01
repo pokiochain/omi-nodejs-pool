@@ -75,9 +75,13 @@
  	return;
  }
 
+ // Developer donations
+ if (devFee < 0.2)
+ 	log('info', logSystem, 'Developer donation \(devDonation\) is set to %d\%, Please consider raising it to 0.2\% or higher !!!', [devFee]);
+
  // Run a single module ?
  var singleModule = (function () {
- 	var validModules = ['daemon', 'pool', 'api', 'unlocker', 'payments', 'chartsDataCollector', 'telegramBot'];
+ 	var validModules = ['pool', 'api', 'unlocker', 'payments', 'chartsDataCollector', 'telegramBot'];
 
  	for (var i = 0; i < process.argv.length; i++) {
  		if (process.argv[i].indexOf('-module=') === 0) {

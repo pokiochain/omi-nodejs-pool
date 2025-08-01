@@ -1,18 +1,18 @@
 {
- 	"poolHost": "POOL_URL",
-	"coin": "GNTLCoin",
-	"symbol": "GNTL",
-	"coinUnits": 1000000000,
-	"coinDecimalPlaces": 9,
+ 	"poolHost": "pool.ominirex.xyz",
+	"coin": "Ominira",
+	"symbol": "OMI",
+	"coinUnits": 100000000,
+	"coinDecimalPlaces": 8,
 	"coinDifficultyTarget": 120,
-	"blockchainExplorer": "https://explorer.gntl.cash/block/{id}",
-	"transactionExplorer": "https://explorer.gntl.cash/tx/{id}",
+	"blockchainExplorer": "https://explorer.ominirex.xyz/block/{id}",
+	"transactionExplorer": "https://explorer.ominirex.xyz/tx/{id}",
 	"cnAlgorithm": "randomx",
-	"cnVariant": 2,
+	"cnVariant": 0, 
 	"cnBlobType": 0,
 	"isRandomX": true,
 	"includeHeight": true,
-	"includeAlgo":"rx/arq",
+	"includeAlgo":"randomx",
 	"logging": {
 		"files": {
 			"level": "info",
@@ -29,10 +29,10 @@
 		"enabled": true,
 		"mergedMining": false,
 		"clusterForks": "auto",
-		"poolAddress": "POOL_WALLET",
-		"pubAddressPrefix": "0x7b2ed",
-		"intAddressPrefix": "0x1c32ed",
-		"subAddressPrefix": "0x20f2ed",
+		"poolAddress": "b1962105b23189f4e4a595086b9311787ce570ac94e6f32c1ed2dfa97037ef26",
+		"pubAddressPrefix": 19,
+		"intAddressPrefix": 20,
+		"subAddressPrefix": 42,
 		"blockRefreshInterval": 1000,
 		"minerTimeout": 900,
         "sslCert": "./cert.pem",
@@ -40,22 +40,10 @@
         "sslCA": "./cert.pem",
 	"ports": [
             {
-                "port": 10007,
+                "port": 7373,
                 "difficulty": 10000,
                 "desc": "Low starting difficulty (TLS)",
-                "ssl": true
-            },
-            {
-                "port": 20007,
-                "difficulty": 100000,
-                "desc": "Medium starting difficulty (TLS)",
-                "ssl": true
-            },
-            {
-                "port": 30007,
-                "difficulty": 1000000,
-                "desc": "High starting difficulty (TLS)",
-                "ssl": true
+                "ssl": false
             }
         ],
 		"varDiff": {
@@ -99,27 +87,27 @@
 
 	"payments": {
 		"enabled": true,
-		"interval": 600,
-		"maxAddresses": 15,
+		"interval": 3600,
+		"maxAddresses": 10,
 		"mixin": 10,
 		"priority": 0,
 		"transferFee": 100000,
 		"dynamicTransferFee": true,
 		"minerPayFee" : true,
-		"minPayment": 10000000000,
-		"maxPayment": 750000000000,
-		"maxTransactionAmount": 1500000000000,
-		"denomination": 100000000
+		"minPayment": 100000000,
+		"maxPayment": 100000000000000,
+		"maxTransactionAmount": 15000000000000000,
+		"denomination": 1
 	},
 
 	"blockUnlocker": {
 		"enabled": true,
 		"interval": 30,
-		"depth": 18,
-		"poolFee": 0.3,
+		"depth": 30,
+		"poolFee": 1,
 		"soloFee": 1,
 		"devDonation": 0,
-		"useFirstVout": true,
+		"useFirstVout": false,
 		"networkFee": 0
 	},
 
@@ -127,11 +115,11 @@
 		"enabled": true,
 		"hashrateWindow": 600,
 		"updateInterval": 5,
-        "bindIp": "0.0.0.0",
+        	"bindIp": "0.0.0.0",
 		"port": 8117,
 		"blocks": 30,
 		"payments": 30,
-		"password": "Password1234",
+		"password": "@fa6d7fds8dsg86sajfau7as8aiqrew!",
 		"ssl": false,
 		"sslPort": 8119,
 		"sslCert": "cert.pem",
@@ -148,12 +136,12 @@
 
 	"daemon": {
 		"host": "127.0.0.1",
-		"port": 16662
+		"port": 40404
 	},
 
 	"wallet": {
 		"host": "127.0.0.1",
-		"port": 16669
+		"port": 40407
 	},
 
 	"redis": {
@@ -307,7 +295,7 @@
 				"maximumPeriod": 86400
 			},
 			"payments": {
-				"enabled": true
+				"enabled": false
 			}
 		},
 		"blocks": {

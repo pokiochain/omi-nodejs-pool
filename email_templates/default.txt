@@ -2,8 +2,5 @@ Hello,
 
 %MESSAGE%
 
-
-
 Thank you,
-
-%POOL_HOST%
+Cheers, the allmighty BlockMaster at %POOL_HOST%
